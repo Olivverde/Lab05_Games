@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class Shooter : MonoBehaviour
 {
-    public AudioSource shoot_;
+    private AudioSource shoot_;
+    public AudioClip SHoot;
     public Camera fpsCam;
     public Text label;
     public int targetsHit = 0;
@@ -13,6 +14,7 @@ public class Shooter : MonoBehaviour
     void Start()
     {
         shoot_ = gameObject.GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class Shooter : MonoBehaviour
 
     void shoot()
     {
+        shoot_.clip = SHoot;
         shoot_.Play();
         RaycastHit objectShot;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out objectShot))
@@ -35,8 +38,8 @@ public class Shooter : MonoBehaviour
                 updateLabel();
             }
         }
-    }
 
+    }
     void updateLabel()
     {
         if (label)
